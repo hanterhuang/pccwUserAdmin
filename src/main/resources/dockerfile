@@ -1,0 +1,24 @@
+FROM java:8
+
+MAINTAINER orange "hanterhuang@126.com"
+
+#定义服务端口
+ENV SERVICE_PORT 80
+#定义服务Id
+ENV SERVICE_ID micoService
+#定义工作目录
+ENV WORK_PATH /work/
+
+#创建工作目录
+RUN mkdir -p $WORK_PATH
+#跳转工作目录
+WORKDIR ${WORK_PATH}
+
+#将版本文件添加到容器中
+ADD ${SERVICE_ID}.tar.gz ${WORK_PATH}
+
+#运行服务  pccwUserAdmin-0.0.1-SNAPSHOT.jar
+ENTRYPOINT java -jar *.jar
+
+#开放服务端口
+EXPOSE 80
